@@ -1,0 +1,29 @@
+# Об'єктні файли
+*.o
+*.obj
+# Виконувані файли
+*.exe
+*.out
+a.out
+# Бібліотеки
+*.lib
+*.a
+*.so
+*.dll
+# Файли налагодження
+*.dSYM/
+*.pdb
+# Директорії збірки
+build/
+bin/
+Debug/
+Release/
+
+# Файли IDE
+.vscode/
+.idea/
+*.sln
+*.vcxproj*
+# Тимчасові файли системи
+.DS_Store
+Thumbs.db
