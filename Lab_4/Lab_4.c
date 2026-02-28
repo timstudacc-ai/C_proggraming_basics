@@ -58,19 +58,19 @@ int main()
         double kelvin = to_kelvin(temp);
 
         // Логіка визначення категорії (можете відкоригувати межі за бажанням)
-        if (temp < -10.0)
+        if (temp <= -10.0)
         {
             category_index = 0; // Мороз
         }
-        else if (temp < 0.0)
+        else if (temp <= 0.0)
         {
             category_index = 1; // Холодно
         }
-        else if (temp < 20.0)
+        else if (temp <= 15.0)
         {
             category_index = 2; // Прохолодно
         }
-        else if (temp < 30.0)
+        else if (temp <= 25.0)
         {
             category_index = 3; // Комфортно
         }
