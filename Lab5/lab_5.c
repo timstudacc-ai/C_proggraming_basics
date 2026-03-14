@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <math.h>
+const double PI = 3.141592653589793;
+// Function prototypes
 double my_cos(double x, double eps);
 double true_cos(double x);
 void print_header(void);
@@ -11,12 +13,12 @@ int last_call_iterations = 0; // Global variable to store iterations of the last
 int main()
 {
     double x;
-    printf("=== Частина 1. Обчислення ряду cos(x) ===\n");
-    printf("Введіть значення x (в радіанах): ");
+    printf("=== Part 1. Computing the cosine series ===\n");
+    printf("Enter the value of x (in radians): ");
     scanf("%lf", &x);
 
-    double results[5];
-    int iterations[5];
+    double results[5]; // to store results for different eps values
+    int iterations[5]; // to store iterations for different eps values
     double eps = 0.1;
 
     for (int i = 0; i < 5; i++)
@@ -34,8 +36,8 @@ int main()
         eps /= 10.0;
     }
 
-    printf("\n=== Частина 2. Рекурсивний вивід двійкового представлення числа ===\n");
-    printf("Двійкове представлення числа y:\n");
+    printf("\n=== Part 2. Recursive output of binary representation of a number ===\n");
+    printf("Binary representation of number y:\n");
     printf("Enter an integer: ");
     int y;
     scanf("%d", &y);
@@ -53,10 +55,12 @@ double my_cos(double x, double eps)
     double sum = 1.0;                  // this is the first term of the series
     double term = 1.0;                 // this will hold the current term being added to the sum
     int n = 1;                         // this is the index of the term being calculated
+    x = fmod(x, 2 * PI);               // reduce x to the range [0, 2π) for better convergence
     while (fabs(term) > eps)
     {
-        // calculate current term via formula: a_n = -x^2/(2n(2n-1)) * a_(n-1)
+        // calculate next term via formula: a_n = -x^2/(2n(2n-1)) * a_(n-1)
         // this avoids the need to calculate factorials directly (can cause overflow) and is more efficient
+        // so first iteration calculates second term
         term *= -(x * x) / ((2 * n - 1) * (2 * n));
         sum += term;
         n++;
@@ -72,7 +76,7 @@ void print_recursive_binary(int n)
     {
         print_recursive_binary(n / 2);
     }
-    printf("%d", n % 2);
+    printf("%d", n % 2); // print the most significant bit first (after the recursive calls) to get the correct order of bits
 }
 
 double true_cos(double x)
@@ -82,7 +86,7 @@ double true_cos(double x)
 
 void print_header(void)
 {
-    printf("Precision   Result    Exact       Error     Iterations\n");
+    printf("%-11s%-13s%-12s%-12s%s\n", "Precision", "Result", "Exact", "Error", "Iterations");
 }
 
 void printRow(double eps, double result, double exact, int iterations)
